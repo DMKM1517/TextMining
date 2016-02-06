@@ -1,0 +1,22 @@
+Brill Tagger Paper Summary
+
+Its a POS tagger
+Advantages
+	Reduction in Storage Information
+	Small and Meaningful rules
+	Better portability to use on different data sets
+	It automatically learns the rules
+
+POS Taggers uses Markovs model
+	They caputure lexical and contextual info
+	1) Paramteters are estimated
+	2) sentences are tagged with the probability score
+
+Rule based Taggers
+	Have higher error rates than POS
+	Rule based tagger with knowledge of syntax = stochastic tagger
+
+This paper is about rule based tagger
+	Based on probabilistic models
+
+
