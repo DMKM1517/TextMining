@@ -18,5 +18,69 @@ Rule based Taggers
 
 This paper is about rule based tagger
 	Based on probabilistic models
+	It is robust as the rules are automatically accquired
+	It accquires small set of meaningful rules
+
+The TAGGER
+	The tagger remembers its weakness and incrementally improves
+	Assigns each word to most likely tag
+	This tagger does not use the contextual information provided
+	It tries to fix its mistake 
+	It has an error rate of 8% when trained on 90% of the tagged Brown Corpus
+	Trainingconsists of compiling a list of the most common tag for each word in the training corpus
+	Tagger acquires patches to improve its performance
+
+90% - training
+5% - testing
+5% - patch acquisition procedure
+
+A list of tagging errors are compiled by comparing with the ground truth
+taga - predicted tag
+tagb - ground truth
+number of times mistagged
+error = < taga,tagb, number > aka triple error
+
+Patch templates are of the form:
+If a word is tagged a and it is in context C, then change that tag to b, or
+If a word is tagged a and it has lexical property P,then change that tag to b, or
+patches are predifined set
+
+diffrent template and error patch are chosen which result in greatest error reduction
+
+Currently, the patch templates are changed tag a to tag b when:
+1. The preceding (following) word is tagged z.
+2. The word two before (after) is tagged z.
+3. One of the two preceding (following) words is tagged Z.
+4. One of the three preceding (following) words is tagged z.
+5. The preceding word is tagged z and the following word is tagged w.
+6. The preceding (following) word is tagged z and the word two before (after) is tagged w.
+7. The current word is (is not) capitalized.
+8. The previous word is (is not) capitalized.
+
+for each error triplet we compute the reduction in error. We comput the new error caused by applying the new patch. 
+improvement = former - latter (error)
+
+Example 
+Initial Tagger - mistags 159 words to verbs - truth nouns
+patch is applied to change verbs to nouns
+It corrects 98 of the 159 error
+This results in additional 18 errors but tagged as nouns truth - verbs
+Net decrease = 80 errors
+Patch that leads to greatest improvent is added to the list of patches
+This cycle continues and
+Applied in order to improve the tagging
+
+1) First tag the text usign basic lexical tagger
+2) Apply patch to decrease the error
+
+One needs to be careful while constructing the ist of patch template.
+If the template is bad , then this template will not be used
+
+Perhaps the biggest contribution of this work is in demonstrating that the stochastic method is not the only viable approach for part of speech tagging. The fact that the simple rule-based tagger can perform so well should offer encouragement for researchers to further explore rule-based tagging, searching for a better and more expressive set of patch templates.
+
+
+
+
+
 
 
